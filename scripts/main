@@ -1,0 +1,64 @@
+import { contador } from "./contador.js";
+
+let audioContext;
+let pitch;
+let segundos;
+const $btnprueba = document.getElementById("prueba"),
+$Valagudo=document.getElementById("agudo"),
+$dialogoP=document.querySelector('#dialogop'),
+$conta=document.querySelector('#conta'),
+$Valbajo=document.getElementById("bajo");
+
+contador();
+
+async function setup() {
+  audioContext = new AudioContext();
+  stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+  startPitch(stream, audioContext);
+}
+setup();
+
+function startPitch(stream, audioContext) {
+  pitch = ml5.pitchDetection('./model/', audioContext , stream, modelLoaded);
+}
+
+function modelLoaded() {
+  document.querySelector('#status').textContent='Model Loaded';
+  getPitch();
+}
+
+function getPitch() {
+  pitch.getPitch(function(err, frequency) {
+    console.log(frequency);
+  })
+}
+$btnprueba.addEventListener("click",(e)=>{
+ segundos = 3; 
+ contador();
+    
+})
+
+
+/*
+
+const $btnstar=document.getElementById("btnstar"),
+$btnstop=document.getElementById("btnstop"),
+$texto=document.getElementById("texto");
+
+let recognition = new webkitSpeechRecognition();
+recognition.lang = "es_MX";
+recognition.continuous = true;
+recognition.interimResults= false;
+
+recognition.onresult =(e) =>{
+    const results = e.results;
+    console.log(results);
+}
+
+$btnstar.addEventListener("click",()=>{
+    recognition.start();
+})
+
+$btnstop.addEventListener("click",()=>{
+    recognition.abort();
+})*/

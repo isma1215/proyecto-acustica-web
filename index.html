@@ -1,0 +1,59 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Poyecto Acustica</title>
+  <link href="style.css" rel="stylesheet">
+  <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+</head>
+
+<body>
+  <header class="header">
+   <img src="img/logo_ipn.png">
+   <h1>Acustica en el area de computacion</h1>
+   <img src="img/logo-esime.png">
+  </header>
+
+  <main>
+  <a href="movimiento.html">Preciona aqui para ir a Control con Voz</a>
+   <section class="seccion">
+    <h2>Rango Vocal</h2>
+    <div>
+      <div class="Rvocal">
+      <p id='frecuencia'class="frecuencia">0.00 Hz</p>
+      <span id="conta" class="frecuencia">0</span>
+      </div>
+      <p id="dialogo"></p>
+      <button id="rango">Rango</button>
+    </div>
+    <div class="afinador">
+
+     <div id="frecAfinador" class="frecAfinado">
+       <h2>Afinador De Guitarra</h2>
+       <span id="AfinadorFrec" class="frecuencia">0.00 Hz</span>
+        <button id="btnFrecActi">Activar</button>
+        <button id="btnFrecDesc" disabled>Desactivar</button>
+     </div>
+    
+     <div id="notas" class="notas">
+       <h2 id="Cuerdas">Seleciona una Cuerda</h2>
+       <button id="cuerda1">Primera Cuerda</button>
+       <button id="cuerda2">Segunda Cuerda</button>
+       <button id="cuerda3">Tercera Cuerda</button>
+       <button id="cuerda4">Cuarta Cuerda</button>
+       <button id="cuerda5">Quinta Cuerda</button>
+       <button id="cuerda6">Sexta Cuerda</button>
+     </div>
+     <img src="/img/Cuerdas-guitarra.jpg">
+   </section>
+
+  </main>
+  
+  
+  
+  <script src="/scripts/main.js" type="module"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3840597070416932"
+     crossorigin="anonymous"></script>
+</body>
+
+</html>

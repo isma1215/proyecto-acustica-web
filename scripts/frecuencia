@@ -1,0 +1,87 @@
+let audioContext,stream,pitch,seg=5,$conta,$dialogo,agudo,grabe,i;
+let frecuencia=[];
+
+export function rango(btnrango,dialogo,conta){
+  document.addEventListener("click",(e)=>{
+    if(e.target.matches(btnrango)){
+      audioContext=new AudioContext();
+      $dialogo=document.querySelector(dialogo);
+      $conta=document.querySelector(conta);
+      micfig();
+      startPitch();
+    }
+
+  })
+}
+async function micfig() {
+  stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false }); 
+}
+function startPitch() {
+  pitch = ml5.pitchDetection('../model/', audioContext , stream, modelLoaded);
+}
+function modelLoaded() {
+    console.log("cargado");
+}
+function getPitch() {
+  pitch.getPitch(function(err, frequency) {
+    if(frequency>=65){
+      frecuencia[seg]=frequency.toFixed(2);
+      document.querySelector('#result').textContent=`${frequency.toFixed(2)} Hz`;
+    }
+  }) }
+
+function grabes(){
+  
+  $conta.innerHTML=seg;
+  //$dialogo.innerHTML="Pronucnia la letra O Continuamente";
+
+  if(seg==0){
+      $conta.innerHTML="0";
+      console.log(frecuencia);
+     /* grabe=200;
+
+      frecuencia.forEach((e)=>{
+        if(e<grabe)
+        grabe=e;
+      })
+
+        console.log(grabe);*/
+        seg=5;frecuencia=[];
+     }
+  else{
+      getPitch();
+      seg--;
+      setTimeout(grabes,1000);
+  }
+}
+function agudos(){
+   agudo=130;
+   frecuencia.forEach((e)=>{
+     if(e>agudo)
+     agudo=e;
+   })
+   console.log(agudo);
+}
+
+/*function contador(){
+    $conta.innerHTML=seg;
+
+    if(seg==0)
+       {$conta.innerHTML="0";
+        console.log(frecuencia);
+          agudos();
+          seg=5;frecuencia=[];
+       }
+    else{
+        getPitch();
+        seg--;
+        setTimeout(contador,1000);
+    }
+    }*/
+
+
+
+function turango(){
+  document.querySelector('#result').textContent=`0 Hz`;
+  document.querySelector(dialogo).innerHTML=`Tu rango vocal al ablar es ${agudo}Hz a ${grabe}Hz`;
+}
